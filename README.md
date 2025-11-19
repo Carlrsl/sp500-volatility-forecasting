@@ -24,10 +24,17 @@ The goal is to predict the future volatility of the market over a two-week horiz
 ### The Target Variable ($Y$)
 The target is the **10-day Realized Volatility**, computed as the rolling standard deviation of daily log-returns:
 
-$$\text{Target}_t = \sigma(r_{t-9}, \dots, r_t)$$
+<div align="center">
+  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\text{Target}_t%20=%20\sigma(r_{t-9},%20\dots,%20r_t)" title="\text{Target}_t = \sigma(r_{t-9}, \dots, r_t)" />
+</div>
 
-*Where $r_t = \ln(P_t) - \ln(P_{t-1})$.*
+<br>
 
+*Where the daily log-return is defined as:*
+
+<div align="center">
+  <img src="https://latex.codecogs.com/svg.latex?\large&space;r_t%20=%20\ln(P_t)%20-%20\ln(P_{t-1})" title="r_t = \ln(P_t) - \ln(P_{t-1})" />
+</div>
 ---
 
 ## 📂 Data & Feature Engineering
@@ -65,11 +72,14 @@ Standard K-Fold cross-validation is unsuitable for time series as it shuffles te
 * This simulates a realistic production environment where the model is periodically retrained.
 
 ### Model Architecture
-We implement an **Ensemble Learning** strategy (Voting Regressor) to optimize the Bias-Variance trade-off:
+We explored a hierarchy of four algorithms to characterize market dynamics before constructing the final ensemble:
 
-1.  **Lasso Regression (L1):** Used for feature selection and capturing high-magnitude volatility spikes (High Bias, Low Variance).
-2.  **XGBoost (Gradient Boosting):** Used for surgical precision during normal market regimes (Low Bias, High Variance).
-3.  **Ridge Regression (L2):** Used as a conservative baseline anchor.
+1.  **Lasso Regression (L1):** Acts as a feature selector and captures high-magnitude volatility spikes (High Bias, Low Variance).
+2.  **XGBoost (Gradient Boosting):** Used for surgical precision during normal market regimes, actively reducing bias by correcting residual errors.
+3.  **Ridge Regression (L2):** Used as a conservative linear baseline.
+4.  **Random Forest (Bagging):** Evaluated as a non-linear benchmark to assess stability and the extrapolation limits ("Ceiling Effect") of tree models.
+
+> **🏆 Final Engine:** The Champion Model is a **Weighted Voting Regressor** combining **Lasso (50%)**, **XGBoost (40%)**, and **Ridge (10%)**, selected for their complementary behavior during the validation phase.
 
 ---
 
@@ -79,11 +89,3 @@ The predictive output is converted into actionable financial metrics:
 
 1.  **Risk Management (VaR):** Estimation of the **Value at Risk (95%)** for a theoretical portfolio, allowing for dynamic capital provisioning during crisis periods (e.g., March 2020).
 2.  **Volatility Targeting:** Simulation of an active investment strategy that scales exposure inversely to predicted volatility ($w_t \propto 1/\hat{\sigma}_t$), aiming to improve the Sharpe Ratio by avoiding drawdown periods.
-
----
-
-## 🛠️ Usage
-
-**1. Clone the repository:**
-```bash
-git clone [https://github.com/Carlrsl/sp500-volatility-forecasting.git](https://github.com/Carlrsl/sp500-volatility-forecasting.git)

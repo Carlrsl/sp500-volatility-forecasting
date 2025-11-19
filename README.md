@@ -5,7 +5,7 @@
 ![XGBoost](https://img.shields.io/badge/XGBoost-FL-28C976?style=flat-square&logo=xgboost&logoColor=white)
 
 > **Authors:** Alec Reynan, Carl Roussel, Louis Roze
-> **Context:** Machine Learning for Finance (Master 2 Project)
+> **Context:** Machine Learning for Finance
 
 ---
 
@@ -24,17 +24,12 @@ The goal is to predict the future volatility of the market over a two-week horiz
 ### The Target Variable ($Y$)
 The target is the **10-day Realized Volatility**, computed as the rolling standard deviation of daily log-returns:
 
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\text{Target}_t%20=%20\sigma(r_{t-9},%20\dots,%20r_t)" title="\text{Target}_t = \sigma(r_{t-9}, \dots, r_t)" />
-</div>
-
-<br>
+$$\text{Target}_t = \sigma(r_{t-9}, \dots, r_t)$$
 
 *Where the daily log-return is defined as:*
 
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.latex?\large&space;r_t%20=%20\ln(P_t)%20-%20\ln(P_{t-1})" title="r_t = \ln(P_t) - \ln(P_{t-1})" />
-</div>
+$$r_t = \ln(P_t) - \ln(P_{t-1})$$
+
 ---
 
 ## 📂 Data & Feature Engineering

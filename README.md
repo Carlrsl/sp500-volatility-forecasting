@@ -19,7 +19,7 @@ Our approach implements a rigorous pipeline designed to eliminate **Look-Ahead B
 
 ## 🎯 Modeling Objective
 
-The goal is to predict the future volatility of the market over a two-week horizon, using only information available at the time of prediction ($t$).
+The goal is to predict the future volatility of the market over a two-week horizon, using only information available at the time of prediction.
 
 ### The Target Variable ($Y$)
 The target is the **10-day Realized Volatility**, computed as the rolling standard deviation of daily log-returns:

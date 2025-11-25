@@ -4,7 +4,7 @@
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
 ![XGBoost](https://img.shields.io/badge/XGBoost-FL-28C976?style=flat-square&logo=xgboost&logoColor=white)
 
-> **Authors:** Alec Reynan, Carl Roussel, Louis Roze
+> **Authors:** Alec Reynen, Carl Roussel, Louis Roze
 > **Context:** Machine Learning for Finance
 
 ---
